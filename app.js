@@ -6,11 +6,12 @@ const axios = require('axios');
 const app = express();
 const port = 3000; // You can change the port number if needed
 const url = process.env.URL;
+const interval = process.env.INTERVAL;
 let i = 0;
 
 app.get('/', (req, res) => {
   setInterval(() => {
-    axios.get(url, {})
+    axios.get(url)
       .then(response => {
         i++;
         console.log(`Request ${i} : ${response.status}`);
@@ -18,7 +19,7 @@ app.get('/', (req, res) => {
       .catch(error => {
         console.error(`Request : ${error.message}`);
       });
-  }, 100);
+  }, interval);
   res.send('Requests initiated');
 });
 
